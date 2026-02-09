@@ -1,16 +1,57 @@
-public class Main{
+import java.util.Scanner;
+public class Main {
     public static void main(String[] args) {
         StudentService service = new StudentService();
-        service.addStudent(new Student(1, "Rahul", "ECE",8.5));
-        service.addStudent(new Student(2, "Ankit", "CSE", 8.1));
-        System.out.println("All Students:");
-        service.displayStudents();
-        System.out.println("\nSearching for student with ID 1:");
-        Student found = service.getStudentId(1);
-        System.out.println(found != null ? found : "Student not found");
-        System.out.println("\nDeleting student with ID 2:");
-        service.deleteStudentByID(2);
-        System.out.println("\nAll student after deletion:");
-        service.displayStudents();
-    }
+        Scanner sc = new Scanner(System.in);
+        int choice;
+do { 
+System.out.println("Student Management Menu");
+System.out.println("1. Add Student");
+System.out.println("2. Display All Students");
+System.out.println("3. Search Student By ID");
+System.out.println("4. Delete Student By ID");
+System.out.println("5. Exit");
+System.out.print("Enter your choice: ");
+choice = sc.nextInt();
+switch(choice) {
+    case 1:
+        System.out.print("Enter ID:");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Enter Name:");
+        String name = sc.nextLine();
+        System.out.print("Enter Dept:");
+        String dept = sc.nextLine();
+        System.out.print("Enter GPA:");
+        double cgpa = sc.nextDouble();
+        service.addStudent(new Student(id, name, dept, cgpa));
+        break;
+
+   case 2:
+    service.displayStudents();
+    break;
+    
+  case 3:
+    System.out.print("Enter ID to search: ");
+    int searchId = sc.nextInt();
+    Student found = service.getStudentId(searchId);
+    System.out.println(found != null ? found : "Student not found");
+    break;
+    
+  case 4:
+    System.out.print("Enter ID to delete: ");
+    int delId = sc.nextInt();
+    service.deleteStudentByID(delId);
+    break;
+    
+   case 5:
+    System.out.println("Exit");
+    break;
+    
+   default:
+    System.out.println("Invalid choice, try again!"); 
+}
+    }while(choice != 5);
+    sc.close();
+}
 }
