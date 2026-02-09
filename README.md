@@ -19,4 +19,4 @@ Built for hands-on Java practice and interview preparation.
 3. Run `Main.java`
 
 ## Author
-Rahul Kumar Nelakurthi
+
