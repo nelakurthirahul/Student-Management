@@ -3,8 +3,9 @@ public class Main {
     public static void main(String[] args) {
         StudentService service = new StudentService();
         Scanner sc = new Scanner(System.in);
-        int choice;
+        int choice = 0;
 do { 
+    try {
 System.out.println("Student Management Menu");
 System.out.println("1. Add Student");
 System.out.println("2. Display All Students");
@@ -24,6 +25,10 @@ switch(choice) {
         String dept = sc.nextLine();
         System.out.print("Enter GPA:");
         double cgpa = sc.nextDouble();
+        if(cgpa < 0 || cgpa > 10) {
+            System.out.println("Invalid CGPA!");
+            break;
+        }
         service.addStudent(new Student(id, name, dept, cgpa));
         break;
 
@@ -34,8 +39,10 @@ switch(choice) {
   case 3:
     System.out.print("Enter ID to search: ");
     int searchId = sc.nextInt();
-    Student found = service.getStudentId(searchId);
-    System.out.println(found != null ? found : "Student not found");
+    System.out.println(
+        service.getStudentId(searchId) != null ?
+        service.getStudentId(searchId) : "Student not found"
+    );
     break;
     
   case 4:
@@ -51,7 +58,11 @@ switch(choice) {
    default:
     System.out.println("Invalid choice, try again!"); 
 }
-    }while(choice != 5);
+} catch(Exception e) {
+    System.out.println("Invalid input! Please enter correct data.");
+    sc.nextLine();
+}
+}while(choice != 5);
     sc.close();
 }
 }
